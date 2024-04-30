@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -21,11 +22,11 @@ public class User {
     private int id;
     @NotBlank(message = "Field not be empty!")
     @Size(min = 2, max = 25, message = "Firstname should be between 2 and 25 char!")
-    @Column(name = "firstName")
+    @Column(name = "first_name")
     private String firstName;
     @NotBlank(message = "Field not be empty!")
     @Size(min = 2, max = 25, message = "Firstname should be between 2 and 25 char!")
-    @Column(name = "lastName")
+    @Column(name = "last_name")
     private String lastName;
 
     @NotNull(message = "Field not be empty!")
@@ -34,14 +35,20 @@ public class User {
     @Column(name = "age")
     private int age;
 
+    @NotBlank(message = "Field not be empty!")
+    @Email(message = "Email should be valid!")
+    @Column(name = "email")
+    private String email;
+
     public User() {
     }
 
-    public User(int id, String firstName, String lastName, int age) {
+    public User(int id, String firstName, String lastName, int age, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.email = email;
     }
 
     public int getId() {
@@ -74,5 +81,13 @@ public class User {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
